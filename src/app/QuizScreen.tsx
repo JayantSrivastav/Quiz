@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import QuizCard from "../components/QuestionCard";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import questions from "../../assets/questions";
 
 export default function QuizScreen() {
   return (
