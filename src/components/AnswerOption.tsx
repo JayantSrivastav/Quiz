@@ -1,10 +1,29 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 
-export default function AnswerOption() {
+type AnswerOption = {
+  option: string;
+  isSelected?: boolean;
+  onPress: () => void;
+};
+
+export default function AnswerOption({
+  option,
+  isSelected,
+  onPress,
+}: AnswerOption) {
   return (
-    <View style={styles.conatiner}>
-      <Text>This is an answer option.</Text>
-    </View>
+    <Pressable
+      onPress={onPress}
+      style={[
+        styles.conatiner,
+        isSelected && {
+          backgroundColor: "#E1F396",
+          borderColor: "3E1F396",
+        },
+      ]}
+    >
+      <Text>{option}</Text>
+    </Pressable>
   );
 }
 
