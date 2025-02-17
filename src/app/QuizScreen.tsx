@@ -9,23 +9,54 @@ import {
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import QuestionCard from "../components/QuestionCard";
 import questions from "../questions";
-const question = questions[0];
+import CustomButton from "../components/CustomButton";
+import { useState } from "react";
+import Card from "../components/Card";
+import { useQuizContext } from "../providers/QuizProvider";
 
 export default function QuizScreen() {
+  const { question, questionIndex } = useQuizContext();
+
+  // const [questionIndex, setQuestionIndex] = useState(0);
+  // const question = questions[questionIndex];
+
+  const onNext = () => {
+    // setQuestionIndex((currValue) => currValue + 1);
+  };
+
   return (
     <SafeAreaView style={styles.page}>
       <View style={styles.conatiner}>
         //Header
         <View>
-          <Text style={styles.title}>Question 1/5</Text>
+          <Text style={styles.title}>Question {questionIndex + 1}/5</Text>
         </View>
         //Body
-        <View>
-          <QuestionCard question={question} />
-          <Text style={styles.time}>20 sec</Text>
-        </View>
+        {question ? (
+          <View>
+            <QuestionCard question={question} />
+            <Text style={styles.time}>20 sec</Text>
+          </View>
+        ) : (
+          <Card title="Well Done">
+            <Text>Correct Answer: 3 / 5</Text>
+            <Text> Best Score: 10</Text>
+          </Card>
+        )}
         //Footer
-        <Pressable
+        <CustomButton
+          title="Next"
+          onPress={onNext}
+          rightIcon={
+            <FontAwesome6
+              name="arrow-right-long"
+              size={16}
+              color="white"
+              // style={styles.buttonIcon}
+            />
+          }
+        />
+        {/* <Pressable
           onPress={() => console.warn("Pressed")}
           onLongPress={() => console.warn("LONG Pressed")}
           style={styles.button}
@@ -37,7 +68,7 @@ export default function QuizScreen() {
             color="white"
             style={styles.buttonIcon}
           />
-        </Pressable>
+        </Pressable> */}
       </View>
     </SafeAreaView>
   );
@@ -64,21 +95,21 @@ const styles = StyleSheet.create({
     color: "#005055",
     fontWeight: "bold",
   },
-  button: {
-    backgroundColor: "#005055",
-    padding: 20,
-    borderRadius: 100,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "500",
-    fontSize: 16,
-    letterSpacing: 1.5,
-  },
-  buttonIcon: {
-    position: "absolute",
-    right: 20,
-  },
+  // button: {
+  //   backgroundColor: "#005055",
+  //   padding: 20,
+  //   borderRadius: 100,
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  // buttonText: {
+  //   color: "white",
+  //   fontWeight: "500",
+  //   fontSize: 16,
+  //   letterSpacing: 1.5,
+  // },
+  // buttonIcon: {
+  //   position: "absolute",
+  //   right: 20,
+  // },
 });
